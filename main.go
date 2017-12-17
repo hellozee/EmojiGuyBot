@@ -11,12 +11,14 @@ import (
 	"local.proj/config"
 )
 
+//Struct for parsing the JSON obtained
 type Emojis struct {
 	Results []struct {
 		Text string `json:"text"`
 	} `json:"results"`
 }
 
+//Fetches the emojis from getdango.com and parses them
 func getEmojis(text string) string {
 	url := "https://api.getdango.com/api/emoji?q=" + text
 
@@ -61,7 +63,7 @@ func getEmojis(text string) string {
 
 func main() {
 	b, err := tb.NewBot(tb.Settings{
-		Token:  config.TelegramToken,
+		Token:  config.TelegramToken, //imported from my local config file
 		Poller: &tb.LongPoller{Timeout: 10 * time.Second},
 	})
 
