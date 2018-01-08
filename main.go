@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	tb "gopkg.in/tucnak/telebot.v2"
@@ -20,6 +21,9 @@ type Emojis struct {
 
 //Fetches the emojis from getdango.com and parses them
 func getEmojis(text string) string {
+
+	text = strings.Replace(text, " ", "%20", -1)
+
 	url := "https://api.getdango.com/api/emoji?q=" + text
 
 	client := http.Client{
